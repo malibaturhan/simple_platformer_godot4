@@ -41,21 +41,28 @@ func movement():
 	
 func check_surrounding():
 	see_surrounding()
-		
+
 
 func see_surrounding():			# its enemy is player!
 	var eye_saw = seeing_raycast.get_collider()				# Eye distance
 	var ground_saw = front_raycast.get_collider()		# Checking if floor under next step
 	var front_foot_saw = front_obstacle_raycast.get_collider()	# Checking obstacles preventing walk
-	
+
 	# Checking for direction change
 	if !ground_saw or front_foot_saw:
 		if eye_saw != player:
 			direction.x *= -1
 			
 	# Checking for attack conditions
-	if eye_saw == player:
-		change_state(state_machine.States.ATTACK)
+	if eye_saw:
+		if eye_saw.name == player.name:
+			var distance_to_player : float = (global_position - player.global_position).length()
+			if distance_to_player <= attack_range:
+				change_state(StateMachine.States.ATTACK)
+			else:
+				change_state(StateMachine.States.CHASE)
+		else:
+			change_state(StateMachine.States.WANDER)
 	
 	
 func action_for_state():

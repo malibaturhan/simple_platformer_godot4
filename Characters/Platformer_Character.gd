@@ -31,6 +31,8 @@ func _ready() -> void:
 	coyote_time = initial_coyote_time
 	camera = get_tree().get_first_node_in_group("PLAYER_CAMERA")
 	add_this_character_to_camera_list()
+	# Game starts with idle
+	change_state(StateMachine.States.IDLE)
 	
 var direction : Vector2 :
 	set(value):
@@ -46,16 +48,7 @@ func apply_gravity(delta):
 	if !is_on_floor():
 		velocity.y += gravity_magnitude * delta
 		change_state(StateMachine.States.JUMP) 
-		print("%s I am floting" %[self.name])
-	elif is_on_floor():
-		if state_machine.active_state == state_machine.States.CHASE:
-			return
-		if abs(direction.x) < 0.1:
-			change_state(StateMachine.States.IDLE) 
-			print("%s I am Idleing" %[self.name])
-		else:
-			change_state(StateMachine.States.WANDER) 
-			print("%s I am wandering" %[self.name])
+
 			
 func check_ground(delta) -> bool:
 	var is_on_ground : bool = false
