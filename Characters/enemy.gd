@@ -43,48 +43,25 @@ func check_surrounding():
 	see_surrounding()
 		
 
-func see_surrounding() -> ObjectSeen:			# its enemy is player!
-	var obj = seeing_raycast.get_collider()
-	var front_floor_object = front_raycast.get_collider()
-	var obj_obstacle = front_obstacle_raycast.get_collider()
-	if obj_obstacle == player:
-		change_state(StateMachine.States.ATTACK)
-	elif obj_obstacle or not front_floor_object:
+func see_surrounding():			# its enemy is player!
+	var eye_saw = seeing_raycast.get_collider()				# Eye distance
+	var ground_saw = front_raycast.get_collider()		# Checking if floor under next step
+	var front_foot_saw = front_obstacle_raycast.get_collider()	# Checking obstacles preventing walk
+	
+	# Checking according to floor - ground - obj
+	if !ground_saw or front_foot_saw:
 		direction.x *= -1
-	if obj:
-		if obj is Player:
-			print("Saw player")
-			distance_to_player = abs((obj.global_position - global_position).length())
-			var objSeen = ObjectSeen.new(true, distance_to_player, true, obj.name)
-			if distance_to_player <= attack_range:
-				change_state(StateMachine.States.ATTACK)
-			elif state_machine.active_state != StateMachine.States.CHASE:
-				change_state(StateMachine.States.CHASE)
-			return objSeen
-		if obj is TileMap:
-			distance_to_player = abs((obj.global_position - global_position).length())
-			var objSeen = ObjectSeen.new(true, distance_to_player, false, obj.name)
-			if state_machine.active_state != StateMachine.States.WANDER:
-				change_state(StateMachine.States.WANDER)
-			return objSeen
-		else:
-			var objSeen = ObjectSeen.new(false, -1, false, obj.name)
-			change_state(StateMachine.States.WANDER)
-			return objSeen
-	return null
-
-
-
+	
 	
 func action_for_state():
 	if state_machine.active_state == StateMachine.States.IDLE:
 		direction = Vector2(0, 0)  # Enemy remains stationary in IDLE
 	if state_machine.active_state == StateMachine.States.CHASE:
 		print("initializing run speed")
-
 		direction = Vector2(sign(direction.x) * 1 * run_speed, 0)
 	if state_machine.active_state == StateMachine.States.WANDER:		
-		direction.x = walk_speed
+		if direction.x == 0:
+			direction.x = walk_speed
 		direction = Vector2(sign(direction.x) * walk_speed, 0)
 	if state_machine.active_state == StateMachine.States.ATTACK:
 		try_attack()
