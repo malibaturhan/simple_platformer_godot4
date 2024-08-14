@@ -48,9 +48,14 @@ func see_surrounding():			# its enemy is player!
 	var ground_saw = front_raycast.get_collider()		# Checking if floor under next step
 	var front_foot_saw = front_obstacle_raycast.get_collider()	# Checking obstacles preventing walk
 	
-	# Checking according to floor - ground - obj
+	# Checking for direction change
 	if !ground_saw or front_foot_saw:
-		direction.x *= -1
+		if eye_saw != player:
+			direction.x *= -1
+			
+	# Checking for attack conditions
+	if eye_saw == player:
+		change_state(state_machine.States.ATTACK)
 	
 	
 func action_for_state():
