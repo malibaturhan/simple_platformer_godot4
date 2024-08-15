@@ -65,7 +65,7 @@ func try_jump():
 		
 		
 func _jump():
-	#print("jumping")
+	print("jumping")
 	velocity.y -= jump_force
 	coyote_time = -1
 
@@ -75,12 +75,12 @@ func try_attack():
 		attack()
 		
 func attack():
-	change_state(StateMachine.States.ATTACK) 
 	print("attacked")
 	
 func finish_attack():
 	print("attack finished")
 	change_state(StateMachine.States.IDLE)
+	
 		
 func take_damage(amount: int):
 	health -= amount
@@ -91,3 +91,21 @@ func add_this_character_to_camera_list() -> void:
 
 func change_state(state: StateMachine.States):
 	state_change.emit(state)
+	
+	
+func action_for_state():
+	if state_machine.active_state == StateMachine.States.IDLE:
+		direction = Vector2(0, 0)  # Enemy remains stationary in IDLE
+	if state_machine.active_state == StateMachine.States.CHASE:
+		print("initializing run speed")
+		direction = Vector2(sign(direction.x) * 1 * run_speed, 0)
+	if state_machine.active_state == StateMachine.States.WANDER:		
+		if direction.x == 0:
+			direction.x = walk_speed
+		direction = Vector2(sign(direction.x) * walk_speed, 0)
+	if state_machine.active_state == StateMachine.States.ATTACK:
+		try_attack()
+	if state_machine.active_state == StateMachine.States.JUMP:
+		try_jump()
+#
+

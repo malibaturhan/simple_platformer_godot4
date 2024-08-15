@@ -2,7 +2,7 @@ extends Node
 
 signal debug_active(bool)
 
-var activated_debug :bool = false
+var activated_debug :bool = true
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("activate_debug_tools"):

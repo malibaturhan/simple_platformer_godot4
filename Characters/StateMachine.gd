@@ -21,5 +21,5 @@ func _ready() -> void:
 	
 func enter_state(new_state: States):
 	active_state = new_state
-	print("entered %s state" %[States.keys()[active_state]])
+	print("%s entered %s state" %[self.get_parent().name ,States.keys()[active_state]])
 

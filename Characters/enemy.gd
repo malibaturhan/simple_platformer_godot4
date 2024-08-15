@@ -1,6 +1,8 @@
 class_name Enemy
 extends PlatformerCharacter
 
+@onready var starting_to_wander: Timer = $StartingToWander
+
 @onready var player : PlatformerCharacter = get_tree().get_first_node_in_group("PLAYER")
 
 @onready var seeing_raycast : RayCast2D = $Facing/EnemyRaycast
@@ -11,7 +13,6 @@ extends PlatformerCharacter
 @onready var front_obstacle_raycast : RayCast2D = $Facing/FrontObstacle
 
 @export var seeable_range	: float = 5.0
-
 @export var attack_range: float:
 	set(value):
 		attack_range = value
@@ -64,17 +65,3 @@ func see_surrounding():			# its enemy is player!
 		else:
 			change_state(StateMachine.States.WANDER)
 	
-	
-func action_for_state():
-	if state_machine.active_state == StateMachine.States.IDLE:
-		direction = Vector2(0, 0)  # Enemy remains stationary in IDLE
-	if state_machine.active_state == StateMachine.States.CHASE:
-		print("initializing run speed")
-		direction = Vector2(sign(direction.x) * 1 * run_speed, 0)
-	if state_machine.active_state == StateMachine.States.WANDER:		
-		if direction.x == 0:
-			direction.x = walk_speed
-		direction = Vector2(sign(direction.x) * walk_speed, 0)
-	if state_machine.active_state == StateMachine.States.ATTACK:
-		try_attack()
-#
