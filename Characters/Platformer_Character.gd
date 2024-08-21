@@ -7,6 +7,11 @@ signal state_change(new_state: StateMachine.States)
 
 var camera : Camera2D
 
+@onready var front_obstacle_raycast 	: RayCast2D = $Facing/FrontObstacle
+@onready var seeing_raycast 			: RayCast2D = $Facing/EnemyRaycast
+@onready var front_raycast				: RayCast2D = $Facing/FrontRaycast
+@onready var rear_raycast				: RayCast2D = $Facing/RearRaycast
+
 var gravity_magnitude : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite: CharacterAnimation = $Facing/AnimatedSprite2D
@@ -28,6 +33,7 @@ signal direction_changed(direction: float)
 
 func _ready() -> void:
 	animated_sprite.attack_completed.connect(finish_attack)
+	animated_sprite.jump_completed.connect(finish_jump)
 	coyote_time = initial_coyote_time
 	camera = get_tree().get_first_node_in_group("PLAYER_CAMERA")
 	add_this_character_to_camera_list()
@@ -39,7 +45,7 @@ var direction : Vector2 :
 		if direction == value:
 			return
 		direction = value
-		print("direction changed on base class")
+		#print("direction changed on base class")
 		direction_changed.emit(value.x)
 	get:
 		return direction
@@ -47,7 +53,6 @@ var direction : Vector2 :
 func apply_gravity(delta):
 	if !is_on_floor():
 		velocity.y += gravity_magnitude * delta
-		change_state(StateMachine.States.JUMP) 
 
 			
 func check_ground(delta) -> bool:
@@ -68,22 +73,32 @@ func _jump():
 	print("jumping")
 	velocity.y -= jump_force
 	coyote_time = -1
+	
+func finish_jump():
+	change_state(StateMachine.States.IDLE)
 
 func try_attack():
 	if can_attack:
-		print("attacked")
+		#print("attacked")
 		attack()
 		
 func attack():
-	print("attacked")
+	#print("attacked")
+	pass
 	
 func finish_attack():
+	# This function will be overriden in enemy and player scripts
 	print("attack finished")
-	change_state(StateMachine.States.IDLE)
+	
 	
 		
 func take_damage(amount: int):
 	health -= amount
+	taken_damage()
+	
+func taken_damage():
+	#virtual class to deal things after taking damage accordingly (for player and enemy)
+	pass
 
 func add_this_character_to_camera_list() -> void:
 	camera.add_platformer_character_to_camera_list(self)
@@ -97,7 +112,7 @@ func action_for_state():
 	if state_machine.active_state == StateMachine.States.IDLE:
 		direction = Vector2(0, 0)  # Enemy remains stationary in IDLE
 	if state_machine.active_state == StateMachine.States.CHASE:
-		print("initializing run speed")
+		#print("initializing run speed")
 		direction = Vector2(sign(direction.x) * 1 * run_speed, 0)
 	if state_machine.active_state == StateMachine.States.WANDER:		
 		if direction.x == 0:
@@ -108,4 +123,3 @@ func action_for_state():
 	if state_machine.active_state == StateMachine.States.JUMP:
 		try_jump()
 #
-

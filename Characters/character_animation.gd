@@ -28,8 +28,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_animation_finished() -> void:
-		if animation == "attack1":
-			attack_completed.emit()
-		if animation == "jump":
-			jump_completed.emit()
-
+	print("animation finish working")
+	if animation == "attack1":
+		attack_completed.emit()
+		print("attack completed emitted")
+	if animation == "jump":
+		jump_completed.emit()
+		print("jump completed emitted")

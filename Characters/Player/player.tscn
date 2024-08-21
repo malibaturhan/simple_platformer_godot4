@@ -218,7 +218,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7c0it")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack1",
 "speed": 10.0
 }, {
@@ -247,7 +247,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5royg")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack2",
 "speed": 10.0
 }, {
@@ -305,7 +305,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_44k38")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 10.0
 }, {
@@ -322,7 +322,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_57rdw")
 }],
-"loop": true,
+"loop": false,
 "name": &"roll",
 "speed": 10.0
 }, {
@@ -356,8 +356,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine") groups=["PLAYER"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_ui_manager", "state_machine") groups=["PLAYER"]]
 script = ExtResource("1_g0rep")
+player_ui_manager = NodePath("PlayerUIManager")
 state_machine = NodePath("StateMachine")
 jump_force = 50.0
 health = 5
@@ -381,12 +382,27 @@ character = NodePath("..")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Facing" node_paths=PackedStringArray("character", "state_machine")]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_2ujm8")
-animation = &"attack1"
+animation = &"roll"
 autoplay = "idle"
-frame_progress = 0.570011
 script = ExtResource("6_oprxb")
 character = NodePath("../..")
 state_machine = NodePath("../../StateMachine")
+
+[node name="FrontRaycast" type="RayCast2D" parent="Facing"]
+position = Vector2(0, -9)
+target_position = Vector2(9, 14)
+
+[node name="RearRaycast" type="RayCast2D" parent="Facing"]
+position = Vector2(0, -9)
+target_position = Vector2(-11, 12)
+
+[node name="FrontObstacle" type="RayCast2D" parent="Facing"]
+position = Vector2(5, -8)
+target_position = Vector2(17, 0)
+
+[node name="EnemyRaycast" type="RayCast2D" parent="Facing"]
+position = Vector2(0, -14)
+target_position = Vector2(100, 0)
 
 [node name="PlayerUIManager" type="Node" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("10_ntudl")
@@ -395,3 +411,5 @@ player = NodePath("..")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("character")]
 script = ExtResource("11_w0xd0")
 character = NodePath("..")
+
+[connection signal="animation_finished" from="Facing/AnimatedSprite2D" to="Facing/AnimatedSprite2D" method="_on_animation_finished"]

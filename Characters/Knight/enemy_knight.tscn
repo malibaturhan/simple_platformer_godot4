@@ -185,7 +185,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_02mj8")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack1",
 "speed": 5.0
 }, {
@@ -282,7 +282,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v2gg8")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 10.0
 }, {
@@ -344,7 +344,7 @@ character = NodePath("..")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Facing" node_paths=PackedStringArray("character", "state_machine")]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_ocphq")
-animation = &"run"
+animation = &"idle"
 script = ExtResource("9_bkiya")
 character = NodePath("../..")
 state_machine = NodePath("../../StateMachine")
@@ -358,8 +358,8 @@ position = Vector2(0, -9)
 target_position = Vector2(-11, 12)
 
 [node name="FrontObstacle" type="RayCast2D" parent="Facing"]
-position = Vector2(0, -5)
-target_position = Vector2(15, 0)
+position = Vector2(5, -8)
+target_position = Vector2(17, 0)
 
 [node name="EnemyRaycast" type="RayCast2D" parent="Facing"]
 position = Vector2(0, -14)

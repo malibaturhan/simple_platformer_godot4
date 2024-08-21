@@ -7,3 +7,6 @@ extends Node
 
 func _ready() -> void:
 	player_health_label.text = str(player.health)
+	
+func refresh():
+	player_health_label.text = str(player.health)

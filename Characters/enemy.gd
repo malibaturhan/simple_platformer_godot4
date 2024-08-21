@@ -5,12 +5,10 @@ extends PlatformerCharacter
 
 @onready var player : PlatformerCharacter = get_tree().get_first_node_in_group("PLAYER")
 
-@onready var seeing_raycast : RayCast2D = $Facing/EnemyRaycast
-@onready var front_raycast: RayCast2D = $Facing/FrontRaycast
-@onready var is_platform_on_front : bool
-@onready var rear_raycast: RayCast2D = $Facing/RearRaycast
-@onready var is_platform_on_rear : bool
-@onready var front_obstacle_raycast : RayCast2D = $Facing/FrontObstacle
+
+@onready var is_platform_on_front 		: bool
+@onready var is_platform_on_rear 		: bool
+
 
 @export var seeable_range	: float = 5.0
 @export var attack_range: float:
@@ -64,4 +62,16 @@ func see_surrounding():			# its enemy is player!
 				change_state(StateMachine.States.CHASE)
 		else:
 			change_state(StateMachine.States.WANDER)
+	
+	
+func finish_attack():
+	#print("attack finished")
+	var enemy_striked
+	enemy_striked = front_obstacle_raycast.get_collider()
+	if enemy_striked == null:
+		change_state(StateMachine.States.WANDER)
+		return
+	if enemy_striked == player:
+		#print("PLAYER DAMAGED BY AI")
+		player.take_damage(1) 
 	
