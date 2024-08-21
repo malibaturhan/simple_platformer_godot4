@@ -13,7 +13,7 @@ var ground_states : Array = [States.IDLE, States.WANDER, States.ATTACK]
 
 @export var character: PlatformerCharacter
 
-var active_state: States
+@export var active_state: States
 
 func _ready() -> void:
 	enter_state(States.IDLE)

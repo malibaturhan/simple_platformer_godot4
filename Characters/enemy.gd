@@ -24,6 +24,9 @@ var distance_to_player : float:
 	get:
 		return distance_to_player
 		
+func specific_inits():
+	get_health_ui()
+		
 		
 func check_front() -> bool:
 	if front_raycast.get_collider():
@@ -74,4 +77,7 @@ func finish_attack():
 	if enemy_striked == player:
 		#print("PLAYER DAMAGED BY AI")
 		player.take_damage(1) 
+		
+func get_health_ui():
+	pass
 	

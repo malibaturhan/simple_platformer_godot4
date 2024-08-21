@@ -5,6 +5,7 @@ var ground_states = [StateMachine.States.IDLE, StateMachine.States.WANDER, State
 @export var player_ui_manager : PlayerUIManager
 
 func _process(delta):
+	action_for_state()
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity.x = direction.x  * run_speed
 	if state_machine.active_state not in ground_states:
@@ -15,13 +16,14 @@ func _process(delta):
 
 
 func _physics_process(delta: float) -> void:
-	action_for_state()
+
 	check_ground(delta)
 	apply_gravity(delta)
 	move_and_slide()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
+		printt("JUMP BUTTON PRESSED", is_on_floor())
 		change_state(StateMachine.States.JUMP)
 	if event.is_action_pressed("attack"):
 		change_state(StateMachine.States.ATTACK)
@@ -38,7 +40,8 @@ func finish_attack():
 		change_state(StateMachine.States.IDLE)
 		print("PLAYER HIT EMPTY")
 		return
-	if enemy_striked.is_class("Enemy"):
+	if enemy_striked.is_class("CharacterBody2D"):
 		print("AI DAMAGED BY PLAYER")
 		enemy_striked.take_damage(1) 
+		change_state(StateMachine.States.IDLE)
 	

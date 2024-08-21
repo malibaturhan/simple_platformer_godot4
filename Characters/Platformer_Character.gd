@@ -32,6 +32,7 @@ var coyote_time 				: float
 signal direction_changed(direction: float)
 
 func _ready() -> void:
+	specific_inits()
 	animated_sprite.attack_completed.connect(finish_attack)
 	animated_sprite.jump_completed.connect(finish_jump)
 	coyote_time = initial_coyote_time
@@ -49,6 +50,11 @@ var direction : Vector2 :
 		direction_changed.emit(value.x)
 	get:
 		return direction
+		
+
+func specific_inits():
+	# This is a virtual class to use of inherited classes
+	pass
 
 func apply_gravity(delta):
 	if !is_on_floor():
@@ -65,8 +71,10 @@ func check_ground(delta) -> bool:
 	return is_on_ground
 
 func try_jump():
-	if coyote_time >= -0.1:
+	if coyote_time >= -0.1 or is_on_floor():
 		_jump()
+	else:
+		print("cannot jump")
 		
 		
 func _jump():
@@ -121,5 +129,6 @@ func action_for_state():
 	if state_machine.active_state == StateMachine.States.ATTACK:
 		try_attack()
 	if state_machine.active_state == StateMachine.States.JUMP:
+		print("IN JUMP STATE")
 		try_jump()
 #
