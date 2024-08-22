@@ -44,6 +44,12 @@ func movement():
 func check_surrounding():
 	see_surrounding()
 
+func taken_damage():
+	# refresh ui
+	# activate damage shader
+	# maybe flee or knockback
+	pass
+	
 
 func see_surrounding():			# its enemy is player!
 	var eye_saw = seeing_raycast.get_collider()				# Eye distance
@@ -79,5 +85,10 @@ func finish_attack():
 		player.take_damage(1) 
 		
 func get_health_ui():
-	pass
+	var parent_node = self
+	var health_ui : Control
+	for obj in self.get_children():
+		if obj.is_in_group("ENEMY_HEALTH_UI"):
+			obj.refresh()
+			return
 	

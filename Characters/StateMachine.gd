@@ -5,6 +5,7 @@ enum States {
 	IDLE,
 	WANDER,
 	CHASE,
+	START_JUMP,
 	JUMP,
 	ATTACK
 }

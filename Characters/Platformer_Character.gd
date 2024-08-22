@@ -4,6 +4,8 @@ extends CharacterBody2D
 signal state_change(new_state: StateMachine.States)
 
 @export var state_machine : StateMachine
+## For debug below
+@export var active_state_debug: StateMachine.States
 
 var camera : Camera2D
 
@@ -71,16 +73,21 @@ func check_ground(delta) -> bool:
 	return is_on_ground
 
 func try_jump():
-	if coyote_time >= -0.1 or is_on_floor():
-		_jump()
-	else:
+	print("trying jump")
+	if coyote_time <= -0.000001:
 		print("cannot jump")
+		return
+	else:
+		_jump()
+		
 		
 		
 func _jump():
+	change_state(StateMachine.States.JUMP)
+	coyote_time = -1
 	print("jumping")
 	velocity.y -= jump_force
-	coyote_time = -1
+
 	
 func finish_jump():
 	change_state(StateMachine.States.IDLE)
@@ -117,6 +124,9 @@ func change_state(state: StateMachine.States):
 	
 	
 func action_for_state():
+	## FOR DEBUG
+	active_state_debug = state_machine.active_state
+	## DEBUG ENDS
 	if state_machine.active_state == StateMachine.States.IDLE:
 		direction = Vector2(0, 0)  # Enemy remains stationary in IDLE
 	if state_machine.active_state == StateMachine.States.CHASE:
@@ -128,7 +138,8 @@ func action_for_state():
 		direction = Vector2(sign(direction.x) * walk_speed, 0)
 	if state_machine.active_state == StateMachine.States.ATTACK:
 		try_attack()
-	if state_machine.active_state == StateMachine.States.JUMP:
-		print("IN JUMP STATE")
+	if state_machine.active_state == StateMachine.States.START_JUMP:
 		try_jump()
+	if state_machine.active_state == StateMachine.States.JUMP:
+		pass
 #
