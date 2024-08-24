@@ -18,6 +18,7 @@ var camera : Camera2D
 var gravity_magnitude : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite: CharacterAnimation = $Facing/AnimatedSprite2D
+@onready var collider : CollisionShape2D = $CollisionShape2D
 
 @export var run_speed 			: float = 15.0
 @export var walk_speed 			: float = 5.0
@@ -106,7 +107,7 @@ func attack():
 	
 func finish_attack():	#VIRTUAL
 	# This function will be overriden in enemy and player scripts
-	print("attack finished")
+	pass
 	
 	
 		
@@ -127,12 +128,12 @@ func change_state(state: StateMachine.States):
 	state_change.emit(state)
 	
 func die():
+	collider.disabled = true
 	change_state(StateMachine.States.DYING)
-	print("dead")
+	debug_logger.add_log("%s is dead now" %[self.name])
 	
 	
 func after_death():
-	print("*****************************I AM AFTER DEATH")
 	queue_free()
 	
 	
@@ -145,7 +146,6 @@ func action_for_state():
 	if state_machine.active_state == StateMachine.States.IDLE:
 		direction = Vector2(0, 0)  # Enemy remains stationary in IDLE
 	if state_machine.active_state == StateMachine.States.CHASE:
-		#print("initializing run speed")
 		direction = Vector2(sign(direction.x) * 1 * run_speed, 0)
 	if state_machine.active_state == StateMachine.States.WANDER:		
 		if direction.x == 0:

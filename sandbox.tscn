@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://dijekh1gkytdi"]
+[gd_scene load_steps=20 format=4 uid="uid://dijekh1gkytdi"]
 
 [ext_resource type="Texture2D" uid="uid://b4gpvp3if8yjh" path="res://Sprites/adventure_tileset.png" id="1_4xhhj"]
 [ext_resource type="Texture2D" uid="uid://mjcqwyuwwr7a" path="res://Sprites/StoneWall32.png" id="2_ik12o"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://DebugToolOnOff.gd" id="5_62j10"]
 [ext_resource type="Script" path="res://DebugLogger.gd" id="6_61h5a"]
 [ext_resource type="Texture2D" uid="uid://bs7266ik84let" path="res://icon.svg" id="8_4iqyy"]
+[ext_resource type="PackedScene" uid="uid://bkwrlfw0aocof" path="res://Characters/Snake/snake.tscn" id="11_8boah"]
 
 [sub_resource type="Environment" id="Environment_5ovoc"]
 background_mode = 3
@@ -235,7 +236,7 @@ run_speed = 150.0
 jump_force = 150.0
 
 [node name="Enemy_knight" parent="." instance=ExtResource("3_33fb8")]
-position = Vector2(387, -18)
+position = Vector2(474, -20)
 attack_range = 30.0
 run_speed = 10.0
 walk_speed = 2.0
@@ -282,3 +283,6 @@ script = ExtResource("6_61h5a")
 
 [node name="DebugController" type="Node" parent="." groups=["DEBUG_CONTROLLER"]]
 script = ExtResource("5_5h57l")
+
+[node name="Snake" parent="." instance=ExtResource("11_8boah")]
+position = Vector2(65, 52)

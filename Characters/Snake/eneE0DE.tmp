@@ -1,16 +1,14 @@
-[gd_scene load_steps=70 format=3 uid="uid://du7kqj5ewm82f"]
+[gd_scene load_steps=53 format=3 uid="uid://du7kqj5ewm82f"]
 
 [ext_resource type="Script" path="res://Characters/Knight/enemy_knight.gd" id="1_f2h4m"]
 [ext_resource type="Texture2D" uid="uid://bylgphqm23qsq" path="res://Sprites/Enemy_Knight/noBKG_KnightAttack_strip.png" id="3_hcbp8"]
 [ext_resource type="Script" path="res://Characters/Facing.gd" id="3_s8u3p"]
 [ext_resource type="Texture2D" uid="uid://dwfpdwlyntmp" path="res://Sprites/Enemy_Knight/noBKG_KnightIdle_strip.png" id="3_svlgv"]
-[ext_resource type="Texture2D" uid="uid://b5jtjue2pri7d" path="res://Sprites/Enemy_Knight/noBKG_KnightDeath_strip.png" id="4_6dt2v"]
 [ext_resource type="Texture2D" uid="uid://dcw0kpu6m8l2t" path="res://Sprites/Enemy_Knight/noBKG_KnightJumpAndFall_strip.png" id="4_pru38"]
 [ext_resource type="Texture2D" uid="uid://7glabba4qp0d" path="res://Sprites/Enemy_Knight/noBKG_KnightRun_strip.png" id="5_k73k1"]
 [ext_resource type="Script" path="res://Characters/StateMachine.gd" id="8_ov5i1"]
 [ext_resource type="FontFile" uid="uid://blykmg3khb2vu" path="res://Long_Shot.ttf" id="9_6sxaa"]
 [ext_resource type="Script" path="res://Characters/character_animation.gd" id="9_bkiya"]
-[ext_resource type="Script" path="res://Characters/Knight/enemy_ui.gd" id="10_uqh47"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bsjmh"]
 radius = 9.0
@@ -26,66 +24,6 @@ region = Rect2(720, 0, 144, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_02mj8"]
 atlas = ExtResource("3_hcbp8")
 region = Rect2(864, 0, 144, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jfj1c"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(0, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x3qvk"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(96, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1cnph"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(192, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fi4u3"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(288, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ofnph"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(384, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x26jn"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(480, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jd4jt"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(576, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2cn2y"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(672, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i1wto"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(768, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rdsqr"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(864, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8sjwa"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(960, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ee3l"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(1056, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fosrc"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(1152, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1bacl"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(1248, 0, 96, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5e42s"]
-atlas = ExtResource("4_6dt2v")
-region = Rect2(1344, 0, 96, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4rq74"]
 atlas = ExtResource("3_svlgv")
@@ -247,59 +185,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_02mj8")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack1",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jfj1c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x3qvk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1cnph")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fi4u3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ofnph")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x26jn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jd4jt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2cn2y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i1wto")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rdsqr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8sjwa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6ee3l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fosrc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1bacl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5e42s")
-}],
-"loop": false,
-"name": &"dead",
-"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -394,7 +282,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v2gg8")
 }],
-"loop": false,
+"loop": true,
 "name": &"jump",
 "speed": 10.0
 }, {
@@ -436,15 +324,14 @@ outline_color = Color(0.829618, 0, 0.182918, 1)
 shadow_size = 5
 shadow_color = Color(0.380392, 0.380392, 0.380392, 1)
 
-[node name="Enemy_knight" type="CharacterBody2D" node_paths=PackedStringArray("health_ui", "state_machine")]
+[node name="Enemy_knight" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("1_f2h4m")
-health_ui = NodePath("EnemyHealth")
 seeable_range = 500.0
 attack_range = 5.0
 state_machine = NodePath("StateMachine")
 jump_force = 10.0
 initial_coyote_time = 0.2
-health = 1
+health = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -15)
@@ -457,9 +344,7 @@ character = NodePath("..")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Facing" node_paths=PackedStringArray("character", "state_machine")]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_ocphq")
-animation = &"dead"
-frame = 14
-frame_progress = 1.0
+animation = &"run"
 script = ExtResource("9_bkiya")
 character = NodePath("../..")
 state_machine = NodePath("../../StateMachine")
@@ -473,8 +358,8 @@ position = Vector2(0, -9)
 target_position = Vector2(-11, 12)
 
 [node name="FrontObstacle" type="RayCast2D" parent="Facing"]
-position = Vector2(5, -8)
-target_position = Vector2(17, 0)
+position = Vector2(0, -5)
+target_position = Vector2(15, 0)
 
 [node name="EnemyRaycast" type="RayCast2D" parent="Facing"]
 position = Vector2(0, -14)
@@ -484,7 +369,7 @@ target_position = Vector2(100, 0)
 script = ExtResource("8_ov5i1")
 character = NodePath("..")
 
-[node name="EnemyHealth" type="Label" parent="." groups=["ENEMY_HEALTH_UI"]]
+[node name="EnemyHealth" type="Label" parent="."]
 offset_left = -19.0
 offset_top = -52.0
 offset_right = 21.0
@@ -493,12 +378,10 @@ text = "5"
 label_settings = SubResource("LabelSettings_iav54")
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("10_uqh47")
 
 [node name="StartingToWander" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
 autostart = true
 
-[connection signal="animation_finished" from="Facing/AnimatedSprite2D" to="Facing/AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="timeout" from="StartingToWander" to="." method="_on_starting_to_wander_timeout"]
