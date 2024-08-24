@@ -7,7 +7,9 @@ enum States {
 	CHASE,
 	START_JUMP,
 	JUMP,
-	ATTACK
+	ATTACK,
+	DYING,
+	DEAD
 }
 
 var ground_states : Array = [States.IDLE, States.WANDER, States.ATTACK]

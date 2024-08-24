@@ -7,7 +7,7 @@ extends AnimatedSprite2D
 
 signal attack_completed
 signal jump_completed
-
+signal dead_signal
 #
 #func check_jump_finish():
 	#if animation == "jump":
@@ -23,6 +23,8 @@ func _physics_process(delta: float) -> void:
 			play("attack1")
 		if state_machine.active_state == StateMachine.States.START_JUMP:
 			play("jump")
+		if state_machine.active_state == StateMachine.States.DYING:
+			play("dead")
 
 
 
@@ -34,3 +36,6 @@ func _on_animation_finished() -> void:
 	if animation == "jump":
 		jump_completed.emit()
 		print("jump completed emitted")
+	if animation == "dead":
+		print("death completed emitted**********************")
+		dead_signal.emit()

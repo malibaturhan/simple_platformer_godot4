@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://df8ebxwyfpdpm"]
+
+[ext_resource type="Texture2D" uid="uid://ormt65tuyyd8" path="res://Sprites/blob.png" id="1_waf7v"]
+
+[sub_resource type="Curve" id="Curve_t17og"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0879121, 0.990226), 0.0, 0.0, 0, 0, Vector2(0.967033, 0.960902), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_tjcq0"]
+curve = SubResource("Curve_t17og")
+
+[sub_resource type="Gradient" id="Gradient_aq03r"]
+offsets = PackedFloat32Array(0, 0.55102, 1)
+colors = PackedColorArray(0.447221, 0.422534, 0.405991, 1, 0.736335, 0.748676, 0.748909, 1, 0.633757, 0.633757, 0.633757, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1x8lg"]
+gradient = SubResource("Gradient_aq03r")
+
+[sub_resource type="Curve" id="Curve_sqxeh"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nwx4e"]
+curve = SubResource("Curve_sqxeh")
+
+[sub_resource type="Curve" id="Curve_1ybqk"]
+_data = [Vector2(0, 0.0616541), 0.0, 0.0, 0, 0, Vector2(0.395604, 0.521053), 0.0, 0.0, 0, 0, Vector2(0.619048, 0.384211), 0.609925, 0.609925, 0, 0, Vector2(0.783883, 0.247368), -0.410526, -0.410526, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_4lk0d"]
+curve = SubResource("Curve_1ybqk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qlhcd"]
+lifetime_randomness = 0.35
+particle_flag_disable_z = true
+angle_min = 3.50001
+angle_max = 6.10001
+direction = Vector3(-41, -15, 0)
+spread = 1.8
+initial_velocity_min = 15.15
+initial_velocity_max = 30.53
+gravity = Vector3(-3, 9.8, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 16.18
+radial_accel_curve = SubResource("CurveTexture_nwx4e")
+damping_min = 30.097
+damping_max = 30.097
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_4lk0d")
+scale_over_velocity_min = 103.8
+scale_over_velocity_max = 236.25
+color_ramp = SubResource("GradientTexture1D_1x8lg")
+alpha_curve = SubResource("CurveTexture_tjcq0")
+anim_speed_min = 0.5
+anim_speed_max = 2.0
+anim_offset_min = 0.1894
+anim_offset_max = 1.0
+turbulence_enabled = true
+
+[node name="walk_dust" type="GPUParticles2D"]
+texture_filter = 2
+texture_repeat = 2
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_qlhcd")
+texture = ExtResource("1_waf7v")
+lifetime = 10.0
+speed_scale = 10.0
+randomness = 0.5
+fixed_fps = 64

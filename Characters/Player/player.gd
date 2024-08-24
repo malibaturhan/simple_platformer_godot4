@@ -16,11 +16,11 @@ func _process(delta):
 	if state_machine.active_state == StateMachine.States.ATTACK and abs(direction.x) > 0:
 		change_state(StateMachine.States.WANDER) 
 	if Input.is_action_pressed("jump") and state_machine.active_state != StateMachine.States.JUMP:
-		printt("JUMP BUTTON PRESSED", is_on_floor(), StateMachine.States.keys()[state_machine.active_state])
+		#printt("JUMP BUTTON PRESSED", is_on_floor(), StateMachine.States.keys()[state_machine.active_state])
 		change_state(StateMachine.States.START_JUMP)
-		printt("JUMP BUTTON PRESSED", is_on_floor(), StateMachine.States.keys()[state_machine.active_state])
+		#printt("JUMP BUTTON PRESSED", is_on_floor(), StateMachine.States.keys()[state_machine.active_state])
 	if Input.is_action_pressed("attack"):
-		print("attack pressed")
+		#print("attack pressed")
 		change_state(StateMachine.States.ATTACK)
 		
 
@@ -34,15 +34,15 @@ func taken_damage():
 		
 
 func finish_attack():
-	print("attack finished")
+	#print("attack finished")
 	var enemy_striked
 	enemy_striked = front_obstacle_raycast.get_collider()
 	if enemy_striked == null:
 		change_state(StateMachine.States.IDLE)
-		print("PLAYER HIT EMPTY")
+		#print("PLAYER HIT EMPTY")
 		return
 	if enemy_striked.is_class("CharacterBody2D"):
-		print("AI DAMAGED BY PLAYER")
+		#print("AI DAMAGED BY PLAYER")
 		enemy_striked.take_damage(1) 
 		change_state(StateMachine.States.IDLE)
 	

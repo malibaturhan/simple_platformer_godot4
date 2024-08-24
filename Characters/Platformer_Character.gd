@@ -2,6 +2,7 @@ class_name PlatformerCharacter
 extends CharacterBody2D
 
 signal state_change(new_state: StateMachine.States)
+@onready var debug_logger : DebugLogger = get_tree().get_first_node_in_group("DEBUG_LOGGER")
 
 @export var state_machine : StateMachine
 ## For debug below
@@ -37,11 +38,13 @@ func _ready() -> void:
 	specific_inits()
 	animated_sprite.attack_completed.connect(finish_attack)
 	animated_sprite.jump_completed.connect(finish_jump)
+	animated_sprite.dead_signal.connect(after_death)
 	coyote_time = initial_coyote_time
 	camera = get_tree().get_first_node_in_group("PLAYER_CAMERA")
 	add_this_character_to_camera_list()
 	# Game starts with idle
 	change_state(StateMachine.States.IDLE)
+	
 	
 var direction : Vector2 :
 	set(value):
@@ -73,9 +76,9 @@ func check_ground(delta) -> bool:
 	return is_on_ground
 
 func try_jump():
-	print("trying jump")
+	#print("trying jump")
 	if coyote_time <= -0.000001:
-		print("cannot jump")
+		#print("cannot jump")
 		return
 	else:
 		_jump()
@@ -85,7 +88,7 @@ func try_jump():
 func _jump():
 	change_state(StateMachine.States.JUMP)
 	coyote_time = -1
-	print("jumping")
+	#print("jumping")
 	velocity.y -= jump_force
 
 	
@@ -101,7 +104,7 @@ func attack():
 	#print("attacked")
 	pass
 	
-func finish_attack():
+func finish_attack():	#VIRTUAL
 	# This function will be overriden in enemy and player scripts
 	print("attack finished")
 	
@@ -109,9 +112,10 @@ func finish_attack():
 		
 func take_damage(amount: int):
 	health -= amount
+	debug_logger.add_log("%s took damage" %[self.name])
 	taken_damage()
 	
-func taken_damage():
+func taken_damage():	#VIRTUAL
 	#virtual class to deal things after taking damage accordingly (for player and enemy)
 	pass
 
@@ -122,8 +126,19 @@ func add_this_character_to_camera_list() -> void:
 func change_state(state: StateMachine.States):
 	state_change.emit(state)
 	
+func die():
+	change_state(StateMachine.States.DYING)
+	print("dead")
+	
+	
+func after_death():
+	print("*****************************I AM AFTER DEATH")
+	queue_free()
+	
 	
 func action_for_state():
+	if state_machine.active_state == StateMachine.States.DYING:
+		return
 	## FOR DEBUG
 	active_state_debug = state_machine.active_state
 	## DEBUG ENDS

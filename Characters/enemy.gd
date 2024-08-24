@@ -5,6 +5,7 @@ extends PlatformerCharacter
 
 @onready var player : PlatformerCharacter = get_tree().get_first_node_in_group("PLAYER")
 
+@export var health_ui : Control
 
 @onready var is_platform_on_front 		: bool
 @onready var is_platform_on_rear 		: bool
@@ -48,7 +49,10 @@ func taken_damage():
 	# refresh ui
 	# activate damage shader
 	# maybe flee or knockback
-	pass
+	if health == 0:
+		print("*****************MY HEALTH IS ZERO I AM GOING DOWN")
+		die()
+
 	
 
 func see_surrounding():			# its enemy is player!
@@ -89,6 +93,6 @@ func get_health_ui():
 	var health_ui : Control
 	for obj in self.get_children():
 		if obj.is_in_group("ENEMY_HEALTH_UI"):
-			obj.refresh()
+			obj.refresh(health)
 			return
 	

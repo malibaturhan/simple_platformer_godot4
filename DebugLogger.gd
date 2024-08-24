@@ -1,3 +1,4 @@
+class_name DebugLogger
 extends RichTextLabel
 
 signal log_queue_changed
