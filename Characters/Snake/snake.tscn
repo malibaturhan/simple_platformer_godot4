@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bkwrlfw0aocof"]
+[gd_scene load_steps=34 format=3 uid="uid://bkwrlfw0aocof"]
 
 [ext_resource type="Script" path="res://Characters/Knight/enemy_knight.gd" id="1_e35hb"]
 [ext_resource type="Script" path="res://Characters/Facing.gd" id="2_hipwg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cju7mcrxpcq7s" path="res://Sprites/snake.png" id="5_r6h38"]
 [ext_resource type="Script" path="res://Characters/character_animation.gd" id="8_t0kmm"]
 [ext_resource type="Script" path="res://Characters/StateMachine.gd" id="9_c1pmh"]
+[ext_resource type="AudioStream" uid="uid://54p3gvoakd0g" path="res://SFX/751340__qubodup__slime-death.ogg" id="9_xs01x"]
 [ext_resource type="FontFile" uid="uid://blykmg3khb2vu" path="res://Long_Shot.ttf" id="10_qd5nw"]
 [ext_resource type="Script" path="res://Characters/Knight/enemy_ui.gd" id="11_kn3dg"]
 
@@ -194,7 +195,7 @@ shadow_color = Color(0.380392, 0.380392, 0.380392, 1)
 script = ExtResource("1_e35hb")
 health_ui = NodePath("EnemyHealth")
 seeable_range = 500.0
-attack_range = 2.0
+attack_range = 20.0
 state_machine = NodePath("StateMachine")
 run_speed = 8.0
 walk_speed = 3.0
@@ -254,6 +255,9 @@ script = ExtResource("11_kn3dg")
 wait_time = 0.1
 one_shot = true
 autostart = true
+
+[node name="DieSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_xs01x")
 
 [connection signal="animation_finished" from="Facing/AnimatedSprite2D" to="Facing/AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="timeout" from="StartingToWander" to="." method="_on_starting_to_wander_timeout"]

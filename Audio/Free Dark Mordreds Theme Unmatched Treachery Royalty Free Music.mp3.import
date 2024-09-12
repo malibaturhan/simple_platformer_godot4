@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b4803wctdviih"
+path="res://.godot/imported/Free Dark Mordreds Theme Unmatched Treachery Royalty Free Music.mp3-1aef39ae3cb3ac32f97aa869e32dd0b9.mp3str"
+
+[deps]
+
+source_file="res://Audio/Free Dark Mordreds Theme Unmatched Treachery Royalty Free Music.mp3"
+dest_files=["res://.godot/imported/Free Dark Mordreds Theme Unmatched Treachery Royalty Free Music.mp3-1aef39ae3cb3ac32f97aa869e32dd0b9.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

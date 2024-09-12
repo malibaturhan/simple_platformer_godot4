@@ -4,6 +4,7 @@ extends PlatformerCharacter
 @onready var starting_to_wander: Timer = $StartingToWander
 
 @onready var player : PlatformerCharacter = get_tree().get_first_node_in_group("PLAYER")
+@onready var die_sfx: AudioStreamPlayer2D = $DieSFX
 
 @export var health_ui : Control
 
@@ -50,10 +51,10 @@ func taken_damage():
 	# activate damage shader
 	# maybe flee or knockback
 	if health == 0:
-		print("*****************MY HEALTH IS ZERO I AM GOING DOWN")
 		die()
 
-	
+func play_death_sfx():
+	die_sfx.play()
 
 func see_surrounding():			# its enemy is player!
 	var eye_saw = seeing_raycast.get_collider()				# Eye distance
@@ -78,14 +79,12 @@ func see_surrounding():			# its enemy is player!
 	
 	
 func finish_attack():
-	#print("attack finished")
 	var enemy_striked
 	enemy_striked = front_obstacle_raycast.get_collider()
 	if enemy_striked == null:
 		change_state(StateMachine.States.WANDER)
 		return
 	if enemy_striked == player:
-		#print("PLAYER DAMAGED BY AI")
 		player.take_damage(1) 
 		
 func get_health_ui():

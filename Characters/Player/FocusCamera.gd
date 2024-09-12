@@ -33,4 +33,3 @@ func subscribe_direction():
 
 func add_platformer_character_to_camera_list(character: PlatformerCharacter):
 	characters.append(character)
-	print("%s is added into camera character list" % [character.name])

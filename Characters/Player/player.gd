@@ -3,6 +3,7 @@ extends PlatformerCharacter
 
 var ground_states = [StateMachine.States.IDLE, StateMachine.States.WANDER, StateMachine.States.ATTACK]
 @export var player_ui_manager : PlayerUIManager
+@export var hint_label:Label
 
 func _process(delta):
 	action_for_state()
@@ -28,7 +29,12 @@ func _physics_process(delta: float) -> void:
 #
 func taken_damage():
 	player_ui_manager.refresh()
-		
+	
+func healed():
+	player_ui_manager.refresh()
+	
+func get_hint_label():
+	return hint_label
 
 func finish_attack():
 	var enemy_striked

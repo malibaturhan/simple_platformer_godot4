@@ -20,7 +20,6 @@ func add_log(log_to_add: String) -> void:
 	log_queue_changed.emit()
 	
 func _update_text():
-	print("debug text updated")
 	for i in range(len(queue)):
 		text += queue[i]
 		

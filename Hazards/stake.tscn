@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c500354k841rb"]
+
+[ext_resource type="Texture2D" uid="uid://d1hh2rod1nxju" path="res://Sprites/stake.png" id="1_qwen2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fwwt"]
+size = Vector2(64, 8)
+
+[node name="Stake" type="Sprite2D"]
+z_index = -1
+texture = ExtResource("1_qwen2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_1fwwt")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b81vb3vur8xig"]
+
+[ext_resource type="Script" path="res://hint_activator.gd" id="1_ojqwo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jhvqv"]
+radius = 38.0
+
+[node name="HintActivator" type="Area2D"]
+script = ExtResource("1_ojqwo")
+hint_text = "hit e to heal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jhvqv")
+debug_color = Color(0.490104, 0.584428, 0, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

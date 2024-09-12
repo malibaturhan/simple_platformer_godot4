@@ -1,0 +1,2 @@
+class_name Flying_Enemy
+extends Node2D

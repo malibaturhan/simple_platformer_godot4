@@ -7,14 +7,12 @@ extends Node2D
 		character = value
 		if is_instance_valid(character):
 			character.direction_changed.connect(change_orientation)
-			#print("subscribed direction_changed")
 		else:
 			return
 	get:
 		return character
 		
 func change_orientation(direction: float):
-	#print("orientation has to be changed")
 	if direction == 0:
 		return
 	scale.x = 1 * sign(direction)

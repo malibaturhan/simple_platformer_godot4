@@ -25,6 +25,7 @@ var gravity_magnitude : int = ProjectSettings.get_setting("physics/2d/default_gr
 @export var jump_force 			: float = 150
 @export var initial_coyote_time : float = 0.4
 @export var can_attack			: bool = true
+@export var max_health			: int
 var coyote_time 				: float
 
 @export var health : int:
@@ -36,6 +37,7 @@ var coyote_time 				: float
 signal direction_changed(direction: float)
 
 func _ready() -> void:
+	health = max_health
 	specific_inits()
 	animated_sprite.attack_completed.connect(finish_attack)
 	animated_sprite.jump_completed.connect(finish_jump)
@@ -52,7 +54,6 @@ var direction : Vector2 :
 		if direction == value:
 			return
 		direction = value
-		#print("direction changed on base class")
 		direction_changed.emit(value.x)
 	get:
 		return direction
@@ -77,9 +78,7 @@ func check_ground(delta) -> bool:
 	return is_on_ground
 
 func try_jump():
-	#print("trying jump")
 	if coyote_time <= -0.000001:
-		#print("cannot jump")
 		return
 	else:
 		_jump()
@@ -89,7 +88,6 @@ func try_jump():
 func _jump():
 	change_state(StateMachine.States.JUMP)
 	coyote_time = -1
-	#print("jumping")
 	velocity.y -= jump_force
 
 	
@@ -98,18 +96,24 @@ func finish_jump():
 
 func try_attack():
 	if can_attack:
-		#print("attacked")
 		attack()
 		
 func attack():
-	#print("attacked")
 	pass
 	
 func finish_attack():	#VIRTUAL
 	# This function will be overriden in enemy and player scripts
 	pass
 	
-	
+func heal():
+	if health == max_health:
+		healed()
+	else:
+		health = max_health
+		
+func healed():
+	# Virtual class to deal things after heal
+	pass
 		
 func take_damage(amount: int):
 	health -= amount
@@ -129,9 +133,12 @@ func change_state(state: StateMachine.States):
 	
 func die():
 	collider.disabled = true
+	play_death_sfx()
 	change_state(StateMachine.States.DYING)
 	debug_logger.add_log("%s is dead now" %[self.name])
 	
+func play_death_sfx():
+	pass
 	
 func after_death():
 	queue_free()

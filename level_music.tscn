@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba61xnyd5sg7e"]
+
+[ext_resource type="AudioStream" uid="uid://b4803wctdviih" path="res://Audio/Free Dark Mordreds Theme Unmatched Treachery Royalty Free Music.mp3" id="1_y6w15"]
+
+[node name="LevelMusic" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_y6w15")
+autoplay = true
+bus = &"Music"
