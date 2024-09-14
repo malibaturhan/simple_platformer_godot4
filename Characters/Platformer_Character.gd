@@ -66,6 +66,7 @@ func specific_inits():
 func apply_gravity(delta):
 	if !is_on_floor():
 		velocity.y += gravity_magnitude * delta
+		
 
 			
 func check_ground(delta) -> bool:

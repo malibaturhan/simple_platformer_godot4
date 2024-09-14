@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwa5exn065tyf"]
+
+[ext_resource type="Texture2D" uid="uid://8vf6mlgchk52" path="res://Sprites/chain.png" id="1_7onhg"]
+[ext_resource type="Script" path="res://elevator.gd" id="1_axu00"]
+[ext_resource type="Texture2D" uid="uid://djuo5ryyruu4k" path="res://Sprites/medieval_elevator.png" id="2_tatnu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbd62"]
+size = Vector2(64, 7.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iddr8"]
+size = Vector2(64, 8)
+
+[node name="Elevator" type="RigidBody2D"]
+mass = 0.001
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_axu00")
+
+[node name="Chain" type="Sprite2D" parent="."]
+position = Vector2(0, -72.775)
+scale = Vector2(0.12, 0.135)
+texture = ExtResource("1_7onhg")
+
+[node name="Chain2" type="Sprite2D" parent="."]
+position = Vector2(0, -215.485)
+scale = Vector2(0.12, 0.135)
+texture = ExtResource("1_7onhg")
+
+[node name="MedievalElevator" type="Sprite2D" parent="."]
+texture = ExtResource("2_tatnu")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_wbd62")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_iddr8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
