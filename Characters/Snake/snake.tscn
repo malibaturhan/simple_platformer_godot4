@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bkwrlfw0aocof"]
+[gd_scene load_steps=35 format=3 uid="uid://bkwrlfw0aocof"]
 
 [ext_resource type="Script" path="res://Characters/Knight/enemy_knight.gd" id="1_e35hb"]
 [ext_resource type="Script" path="res://Characters/Facing.gd" id="2_hipwg"]
@@ -191,6 +191,9 @@ outline_color = Color(0.829618, 0, 0.182918, 1)
 shadow_size = 5
 shadow_color = Color(0.380392, 0.380392, 0.380392, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ux3f1"]
+radius = 7.0
+
 [node name="Snake" type="CharacterBody2D" node_paths=PackedStringArray("health_ui", "state_machine")]
 script = ExtResource("1_e35hb")
 health_ui = NodePath("EnemyHealth")
@@ -258,6 +261,13 @@ autostart = true
 
 [node name="DieSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_xs01x")
+
+[node name="EnemyAura" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyAura"]
+position = Vector2(2, -5)
+shape = SubResource("CircleShape2D_ux3f1")
+debug_color = Color(0.873197, 0.705324, 0, 0.42)
 
 [connection signal="animation_finished" from="Facing/AnimatedSprite2D" to="Facing/AnimatedSprite2D" method="_on_animation_finished"]
 [connection signal="timeout" from="StartingToWander" to="." method="_on_starting_to_wander_timeout"]

@@ -26,4 +26,3 @@ func create_buttons():
 		new_button.text = node.name
 		new_button.pressed.connect(teleport.bind(node.global_transform))
 		self.add_child(new_button)
-		print("signals are bound")

@@ -2,6 +2,7 @@ class_name Enemy
 extends PlatformerCharacter
 
 @onready var starting_to_wander: Timer = $StartingToWander
+@onready var enemy_aura : Area2D = $EnemyAura
 
 @onready var player : PlatformerCharacter = get_tree().get_first_node_in_group("PLAYER")
 @onready var die_sfx: AudioStreamPlayer2D = $DieSFX
@@ -28,7 +29,8 @@ var distance_to_player : float:
 		
 func specific_inits():
 	get_health_ui()
-		
+	enemy_aura.body_entered.connect(repel_player)
+	
 		
 func check_front() -> bool:
 	if front_raycast.get_collider():
@@ -76,6 +78,9 @@ func see_surrounding():			# its enemy is player!
 				change_state(StateMachine.States.CHASE)
 		else:
 			change_state(StateMachine.States.WANDER)
+			
+func repel_player():
+	print("need to repel player and decrease its health")
 	
 	
 func finish_attack():
