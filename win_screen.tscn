@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4nvu4bapgeig"]
+
+[ext_resource type="FontFile" uid="uid://blykmg3khb2vu" path="res://Long_Shot.ttf" id="1_b2awp"]
+[ext_resource type="Script" path="res://win_screen.gd" id="1_mi6h4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iyvso"]
+font = ExtResource("1_b2awp")
+font_size = 66
+font_color = Color(0.976471, 0.72549, 0.211765, 1)
+outline_size = 25
+outline_color = Color(0.414834, 0.294276, 0.0252439, 1)
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_mi6h4")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 1151.0
+offset_bottom = 234.0
+text = "YOU GET THE GOLD"
+label_settings = SubResource("LabelSettings_iyvso")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="quitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 491.0
+offset_top = 356.0
+offset_right = 728.0
+offset_bottom = 424.0
+text = "quit"
+
+[connection signal="button_up" from="quitButton" to="." method="_on_quit_button_button_up"]

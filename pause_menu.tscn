@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=3 uid="uid://be5j8jexqj2xh"]
+
+[ext_resource type="FontFile" uid="uid://blykmg3khb2vu" path="res://Long_Shot.ttf" id="1_0d073"]
+[ext_resource type="PackedScene" uid="uid://cl0ky6ccjkc4h" path="res://music_slider.tscn" id="1_7h3mo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lndgr"]
+font = ExtResource("1_0d073")
+font_size = 156
+font_color = Color(0.922337, 0, 0.157265, 1)
+outline_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_rrlbq"]
+line_spacing = 2.955
+font_size = 1
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 135.0
+offset_right = 782.0
+offset_bottom = 511.0
+
+[node name="title" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "paused"
+label_settings = SubResource("LabelSettings_lndgr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterVolLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Master Volume
+"
+horizontal_alignment = 1
+
+[node name="MasterVolSlider" parent="HBoxContainer" instance=ExtResource("1_7h3mo")]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+step = 0.001
+bus_name = "Master"
+
+[node name="SFXVolLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "SFX Volume
+"
+horizontal_alignment = 1
+
+[node name="SFXVolSlider" parent="HBoxContainer" instance=ExtResource("1_7h3mo")]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+step = 0.001
+bus_name = "SFX"
+
+[node name="MusicVolLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Music Volume
+"
+horizontal_alignment = 1
+
+[node name="MusicVolSlider" parent="HBoxContainer" instance=ExtResource("1_7h3mo")]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+step = 0.001
+bus_name = "Music"
+
+[node name="title2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_rrlbq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="quitButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "quit
+"

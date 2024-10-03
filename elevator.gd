@@ -11,10 +11,16 @@ var passed_y_position := 0.0
 var elevator_can_run:bool = false
 var is_elevator_running := false
 var initial_direction : int
-
+var initial_position : Vector2
 
 func _ready():
-	pass
+	initial_position = global_transform.origin
+	
+func reset():
+	global_transform.origin = initial_position
+	elevator_can_run = false
+	is_elevator_running = false
+	passed_y_position = 0
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
@@ -45,9 +51,6 @@ func check_sfx():
 func move_elevator(delta: float):
 	var movement_amount = delta * speed
 	passed_y_position += movement_amount
-	printt("passed y position: ", passed_y_position)
-	printt("final offset: ", final_offset)
 	if passed_y_position >= abs(final_offset):
 		is_elevator_running = false
-	printt("is elevator running: ", is_elevator_running)
 	global_transform.origin += Vector2.UP * movement_amount

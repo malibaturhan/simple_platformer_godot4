@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl0ky6ccjkc4h"]
+
+[ext_resource type="Script" path="res://volume_slider.gd" id="1_l4pbn"]
+
+[node name="volume_slider" type="HSlider"]
+offset_right = 8.0
+offset_bottom = 16.0
+max_value = 1.0
+step = 100.0
+script = ExtResource("1_l4pbn")

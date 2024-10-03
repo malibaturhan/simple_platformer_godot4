@@ -4,17 +4,20 @@
 [ext_resource type="Script" path="res://Hazards/stake.gd" id="2_206xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fwwt"]
-size = Vector2(64, 8)
+size = Vector2(58, 7.45355)
 
 [node name="Stake" type="Area2D"]
 z_index = -1
+position = Vector2(0, -4.43)
+scale = Vector2(0.75, 1.83)
 script = ExtResource("2_206xs")
 
 [node name="StaticBody2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_qwen2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(-1, 4.27322)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_1fwwt")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

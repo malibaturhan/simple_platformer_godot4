@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://deagq1renlwlx"]
+
+[ext_resource type="Script" path="res://menu_manager.gd" id="1_3raww"]
+[ext_resource type="PackedScene" uid="uid://be5j8jexqj2xh" path="res://pause_menu.tscn" id="1_rfsql"]
+
+[node name="MenuManager" type="Node"]
+script = ExtResource("1_3raww")
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_rfsql")]

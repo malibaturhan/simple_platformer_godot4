@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Characters/Player/hint_label.gd" id="15_mio8a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h3d3y"]
+radius = 8.0
 height = 44.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6wb5b"]
@@ -346,11 +347,13 @@ outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_ui_manager", "hint_label", "state_machine") groups=["PLAYER"]]
+collision_layer = 3
 script = ExtResource("1_g0rep")
 player_ui_manager = NodePath("PlayerUIManager")
 hint_label = NodePath("Hint_Label")
 state_machine = NodePath("StateMachine")
-jump_force = 50.0
+run_speed = 18.0
+jump_force = 55.0
 health = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -388,7 +391,7 @@ target_position = Vector2(-11, 12)
 
 [node name="FrontObstacle" type="RayCast2D" parent="Facing"]
 position = Vector2(5, -8)
-target_position = Vector2(17, 0)
+target_position = Vector2(25, 2)
 
 [node name="EnemyRaycast" type="RayCast2D" parent="Facing"]
 position = Vector2(0, -14)

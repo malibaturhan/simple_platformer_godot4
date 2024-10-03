@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq4i0d5xdpboi"]
+
+[ext_resource type="Texture2D" uid="uid://46cjqeyhutio" path="res://Sprites/goldcoin1.png" id="1_nyfuy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ctq2t"]
+friction = 0.1
+rough = true
+bounce = 0.86
+absorbent = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gcwgc"]
+radius = 6.0
+
+[node name="Coin" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_ctq2t")
+gravity_scale = 0.255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gcwgc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.425, 0.555)
+texture = ExtResource("1_nyfuy")

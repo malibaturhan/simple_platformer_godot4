@@ -66,9 +66,7 @@ func specific_inits():
 func apply_gravity(delta):
 	if !is_on_floor():
 		velocity.y += gravity_magnitude * delta
-		
 
-			
 func check_ground(delta) -> bool:
 	var is_on_ground : bool = false
 	if !is_on_floor():
@@ -84,14 +82,11 @@ func try_jump():
 	else:
 		_jump()
 		
-		
-		
 func _jump():
 	change_state(StateMachine.States.JUMP)
 	coyote_time = -1
 	velocity.y -= jump_force
 
-	
 func finish_jump():
 	change_state(StateMachine.States.IDLE)
 

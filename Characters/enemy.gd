@@ -2,7 +2,6 @@ class_name Enemy
 extends PlatformerCharacter
 
 @onready var starting_to_wander: Timer = $StartingToWander
-@onready var enemy_aura : Area2D = $EnemyAura
 
 @onready var player : PlatformerCharacter = get_tree().get_first_node_in_group("PLAYER")
 @onready var die_sfx: AudioStreamPlayer2D = $DieSFX
@@ -12,7 +11,7 @@ extends PlatformerCharacter
 @onready var is_platform_on_front 		: bool
 @onready var is_platform_on_rear 		: bool
 
-
+@export var repel_power : float = 100
 @export var seeable_range	: float = 5.0
 @export var attack_range: float:
 	set(value):
@@ -29,7 +28,6 @@ var distance_to_player : float:
 		
 func specific_inits():
 	get_health_ui()
-	enemy_aura.body_entered.connect(repel_player)
 	
 		
 func check_front() -> bool:
@@ -79,8 +77,11 @@ func see_surrounding():			# its enemy is player!
 		else:
 			change_state(StateMachine.States.WANDER)
 			
-func repel_player():
-	print("need to repel player and decrease its health")
+func repel_player(body):
+	printt("body velocity: ", body.velocity)
+	var repel_vector = (body.global_transform.origin - global_transform.origin).normalized()
+	body.global_transform.origin += repel_vector
+	body.velocity = repel_vector * repel_power
 	
 	
 func finish_attack():
